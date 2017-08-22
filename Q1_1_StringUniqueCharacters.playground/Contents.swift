@@ -44,3 +44,4 @@ func isUniqueLowercaseLetter(string: String) -> Bool {
 
 isUniqueLowercaseLetter(string: "swift")
 isUniqueLowercaseLetter(string: "apple")
+
