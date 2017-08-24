@@ -41,12 +41,16 @@ func mergeSort<T: Comparable>(_ array: inout [T], _ left: Int, _ right: Int) {
     let middle = (left + right) / 2
     
     mergeSort(&array, left, middle)
-    mergeSort(&array, middle+1, right)
+    mergeSort(&array, middle + 1, right)
     merge(&array, left, middle, right)
 }
 
+func mergeSort<T: Comparable>(array: inout[T]) {
+    mergeSort(&array, 0, array.count - 1)
+}
+
 var numbers = [13, 77, 20, 45, 2, 15, 0, 59, 5, 68, 51, 1, -1, 77]
-mergeSort(&numbers, 0, numbers.count - 1)
+mergeSort(array: &numbers)
 
 
 
