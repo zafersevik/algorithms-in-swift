@@ -11,6 +11,10 @@ func insert<T: Comparable>(_ array: inout [T], _ rightIndex: Int, _ value: T) {
 }
 
 func insertionSort<T: Comparable>(_ array: inout [T]) {
+    if array.isEmpty {
+        return
+    }
+    
     for index in 1..<array.count {
         insert(&array, index-1, array[index])
     }
@@ -18,3 +22,6 @@ func insertionSort<T: Comparable>(_ array: inout [T]) {
 
 var numbers = [13, 77, 20, 45, 2, 15, 0, 59, 5, 68, 51, 1, -1, 77]
 insertionSort(&numbers)
+
+var emptyNumbersArray = [Int]()
+insertionSort(&emptyNumbersArray)
