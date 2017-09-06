@@ -1,27 +1,27 @@
 //: Playground - noun: a place where people can play
 
-func insert<T: Comparable>(_ array: inout [T], _ rightIndex: Int, _ value: T) {
-    var i = rightIndex
+func insert<T: Comparable>(array: inout [T], rightIndex: Int, value: T) {
+    var index = rightIndex
     
-    while i >= 0 && value < array[i] {
-        array[i+1] = array[i]
-        i -= 1
+    while index >= 0 && value < array[index] {
+        array[index+1] = array[index]
+        index -= 1
     }
-    array[i+1] = value
+    array[index+1] = value
 }
 
-func insertionSort<T: Comparable>(_ array: inout [T]) {
+func insertionSort<T: Comparable>(array: inout [T]) {
     if array.isEmpty {
         return
     }
     
     for index in 1..<array.count {
-        insert(&array, index-1, array[index])
+        insert(array: &array, rightIndex: index-1, value: array[index])
     }
 }
 
 var numbers = [13, 77, 20, 45, 2, 15, 0, 59, 5, 68, 51, 1, -1, 77]
-insertionSort(&numbers)
+insertionSort(array: &numbers)
 
 var emptyNumbersArray = [Int]()
-insertionSort(&emptyNumbersArray)
+insertionSort(array: &emptyNumbersArray)
