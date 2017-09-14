@@ -1,14 +1,14 @@
-import Foundation
+//: Playground - noun: a place where people can play
 
-func merge<T: Comparable>(_ array: inout [T], _ left: Int, _ middle: Int, _ right: Int) {
-    let leftSubarray = Array(array[left...middle])
-    let rightSubarray = Array(array[(middle+1)...right])
+func merge<T: Comparable> (array: inout [T], startIndex: Int, middleIndex: Int, endIndex: Int) {
+    let leftSubarray = Array(array[startIndex...middleIndex])
+    let rightSubarray = Array(array[middleIndex+1...endIndex])
     
-    var index = left
+    var index = startIndex
     var leftIndex = 0
     var rightIndex = 0
     
-    while (leftIndex < leftSubarray.count) && (rightIndex < rightSubarray.count) {
+    while leftIndex < leftSubarray.count && rightIndex < rightSubarray.count {
         if leftSubarray[leftIndex] < rightSubarray[rightIndex] {
             array[index] = leftSubarray[leftIndex]
             leftIndex += 1
@@ -22,31 +22,30 @@ func merge<T: Comparable>(_ array: inout [T], _ left: Int, _ middle: Int, _ righ
     
     while leftIndex < leftSubarray.count {
         array[index] = leftSubarray[leftIndex]
-        leftIndex += 1
         index += 1
+        leftIndex += 1
     }
     
     while rightIndex < rightSubarray.count {
         array[index] = rightSubarray[rightIndex]
-        rightIndex += 1
         index += 1
+        rightIndex += 1
     }
 }
 
-func mergeSort<T: Comparable>(_ array: inout [T], _ left: Int, _ right: Int) {
-    if left >= right {
+func mergeSort<T: Comparable>(array: inout [T], startIndex: Int, endIndex: Int) {
+    if startIndex >= endIndex {
         return
     }
     
-    let middle = (left + right) / 2
-    
-    mergeSort(&array, left, middle)
-    mergeSort(&array, middle + 1, right)
-    merge(&array, left, middle, right)
+    let middleIndex = (startIndex + endIndex) / 2
+    mergeSort(array: &array, startIndex: startIndex, endIndex: middleIndex)
+    mergeSort(array: &array, startIndex: middleIndex+1, endIndex: endIndex)
+    merge(array: &array, startIndex: startIndex, middleIndex: middleIndex, endIndex: endIndex)
 }
 
-func mergeSort<T: Comparable>(array: inout[T]) {
-    mergeSort(&array, 0, array.count - 1)
+func mergeSort<T: Comparable>(array: inout [T]) {
+    mergeSort(array: &array, startIndex: 0, endIndex: array.count-1)
 }
 
 var numbers = [13, 77, 20, 45, 2, 15, 0, 59, 5, 68, 51, 1, -1, 77]
