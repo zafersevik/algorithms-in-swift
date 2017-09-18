@@ -34,6 +34,7 @@ func merge<T: Comparable> (array: inout [T], startIndex: Int, middleIndex: Int, 
 }
 
 func mergeSort<T: Comparable>(array: inout [T], startIndex: Int, endIndex: Int) {
+    // Base case
     if startIndex >= endIndex {
         return
     }
