@@ -1,18 +1,14 @@
 //: Playground - noun: a place where people can play
 
-func swap<T: Comparable>(leftValue: inout T, rightValue: inout T) {
-    (leftValue, rightValue) = (rightValue, leftValue)
-}
-
 func partition<T: Comparable>(array: inout [T], startIndex: Int, endIndex: Int) -> Int {
     var q = startIndex
     for index in startIndex..<endIndex {
         if array[index] < array[endIndex] {
-            swap(leftValue: &array[q], rightValue: &array[index])
+			array.swapAt(q, index)
             q += 1
         }
     }
-    swap(leftValue: &array[q], rightValue: &array[endIndex])
+	array.swapAt(q, endIndex)
     
     return q
 }
